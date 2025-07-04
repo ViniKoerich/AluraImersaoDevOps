@@ -1,0 +1,22 @@
+# Define a versão do Docker Compose a ser usada. A versão '3.9' é moderna e recomendada.
+version: '3.9'
+
+# 'services' é a seção onde definimos os contêineres que compõem nossa aplicação.
+services:
+  # 'api' é o nome que damos ao nosso serviço/contêiner da aplicação FastAPI.
+  api:
+    # 'build: .' instrui o Docker Compose a construir uma imagem a partir do Dockerfile
+    # localizado no diretório atual (.).
+    build: .
+    # 'container_name' define um nome fixo e legível para o nosso contêiner.
+    container_name: gestao_escolar_api
+    # 'ports' mapeia uma porta da máquina host para uma porta dentro do contêiner.
+    # Formato: "HOST:CONTAINER". Aqui, acessamos via http://localhost:8000.
+    ports:
+      - "8000:8000"
+    # 'volumes' monta um diretório do host para dentro do contêiner.
+    # Isso permite o live-reload (as alterações no código são refletidas instantaneamente)
+    # e a persistência de dados (o arquivo do SQLite será salvo no host).
+    volumes:
+      - .:/app  # 'environment' define variáveis de ambiente dentro do contêiner.
+  
